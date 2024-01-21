@@ -13,6 +13,6 @@ public class ManagerSpawner : MonoBehaviour
 
     public void SpawnNetworkManager()
     {
-
+        Instantiate(networkManagerPrefab);
     }
 }

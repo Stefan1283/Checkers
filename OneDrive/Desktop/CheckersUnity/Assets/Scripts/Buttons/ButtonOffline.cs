@@ -18,7 +18,18 @@ public class ButtonOffline : MonoBehaviour
         }
         else
         {
-            
+            NetworkManager.singleton.ServerChangeScene("Lobby Scene");
+
+            if (NetworkServer.active && NetworkClient.isConnected)
+            {
+                NetworkManager.singleton.StopHost();
+            }
+
+            else
+            {
+                NetworkManager.singleton.StopClient();
+            }
+            Destroy(NetworkManager.singleton.gameObject);
         }
     }
 }
