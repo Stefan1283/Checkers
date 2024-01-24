@@ -11,6 +11,19 @@ public class JoinLobbyMenu : MonoBehaviour
 
     public void Join()
     {
-        
+        NetworkManager.singleton.networkAddress = addressInput.text;
+        NetworkManager.singleton.StartClient();
+    }
+
+    private void Start()
+    {
+        CheckersNetworkManager.ClientOnConnected += HandleClientConnected;
+
+    }
+
+    void HandleClientConnected()
+    {
+        onlinePage.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
