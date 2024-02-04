@@ -7,11 +7,18 @@ using UnityEngine;
 
 public class PlayerNetwork : Player
 {
-    [SyncVar] string displayName;
-    public string DisplayName
+    public static event Action ClientOnInfoUpdated;
+
+    [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))] string displayName;
+    public string PlayerDisplayName
     {
         get { return displayName; }
         [Server]
-        set { displayName = value; }
+        set { displayName = value; }                      
+    }
+
+    void ClientHandleDisplayNameUpdated(string oldName, string newName)
+    {
+        ClientOnInfoUpdated?.Invoke();
     }
 }
