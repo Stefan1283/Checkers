@@ -43,4 +43,11 @@ public class CheckersNetworkManager : NetworkManager
     {
         networkPlayers.Clear();
     }
+
+    public override void OnClientDisconnect()
+    {
+        base.OnClientDisconnect();
+        SceneManager.LoadScene("Lobby Scene");
+        Destroy(gameObject);
+    }
 }

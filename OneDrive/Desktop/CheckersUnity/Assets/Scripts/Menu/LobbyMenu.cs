@@ -19,11 +19,13 @@ public class LobbyMenu : MonoBehaviour
     private void Start()
     {
         PlayerNetwork.ClientOnInfoUpdated += ClientHandleInfoUpdated;
+        PlayerNetwork.AuthorityOnLobbyOwnerStateUpdated += AuthorityHandleLobbyOwnerStateUpdated;
     }
 
     private void OnDestroy()
     {
         PlayerNetwork.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
+        PlayerNetwork.AuthorityOnLobbyOwnerStateUpdated -= AuthorityHandleLobbyOwnerStateUpdated;
     }
 
     void ClientHandleInfoUpdated()
@@ -37,5 +39,9 @@ public class LobbyMenu : MonoBehaviour
         {
             playerNameTexts[i].text = "Waiting for players...";
         }
+    }
+    void AuthorityHandleLobbyOwnerStateUpdated(bool status)
+    {
+        startGameButton.gameObject.SetActive(status);
     }
 }
