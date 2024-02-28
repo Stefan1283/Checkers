@@ -25,8 +25,9 @@ public class CheckersNetworkManager : NetworkManager
         GameObject playerInstance = Instantiate(playerPrefab);
         NetworkServer.AddPlayerForConnection(conn, playerInstance);
         PlayerNetwork player = playerInstance.GetComponent<PlayerNetwork>();
+
         networkPlayers.Add(player);
-        player.IsWhite = numPlayers == 1;
+        player.LobbyOwner = player.IsWhite = numPlayers == 1;
         player.PlayerDisplayName = player.IsWhite 
             ? "White"
             : "Black";

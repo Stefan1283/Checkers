@@ -13,7 +13,7 @@ public class LobbyMenu : MonoBehaviour
 
     public void StartGame()
     {
-        
+        NetworkManager.singleton.ServerChangeScene("Game Scene");
     }
 
     private void Start()
@@ -39,6 +39,7 @@ public class LobbyMenu : MonoBehaviour
         {
             playerNameTexts[i].text = "Waiting for players...";
         }
+        startGameButton.interactable = players.Count > 1; 
     }
     void AuthorityHandleLobbyOwnerStateUpdated(bool status)
     {
