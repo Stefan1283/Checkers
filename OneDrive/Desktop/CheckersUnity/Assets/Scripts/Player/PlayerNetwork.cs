@@ -56,4 +56,8 @@ public class PlayerNetwork : Player
         ClientOnInfoUpdated?.Invoke();
     }
 
+    void Start()
+    {
+        DontDestroyOnLoad(gameObject);    
+    }
 }
