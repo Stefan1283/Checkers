@@ -16,7 +16,9 @@ public class CheckersNetworkManager : NetworkManager
 
     public List<PlayerNetwork> networkPlayers = new List<PlayerNetwork>();
 
-    
+    public List<Player> players = new List<Player>();
+
+
     public override void OnClientConnect()
     {
         base.OnClientConnect();
@@ -30,6 +32,7 @@ public class CheckersNetworkManager : NetworkManager
         PlayerNetwork player = playerInstance.GetComponent<PlayerNetwork>();
 
         networkPlayers.Add(player);
+        players.Add(player);
         player.LobbyOwner = player.IsWhite = numPlayers == 1;
         player.PlayerDisplayName = player.IsWhite 
             ? "White"
@@ -40,12 +43,14 @@ public class CheckersNetworkManager : NetworkManager
     {
         var player = conn.identity.GetComponent<PlayerNetwork>();
         networkPlayers.Remove(player);
+        players.Remove(player);
         base.OnServerDisconnect(conn);
     }
 
     public override void OnStopServer()
     {
         networkPlayers.Clear();
+        players.Clear();
     }
 
     public override void OnClientDisconnect()

@@ -60,4 +60,9 @@ public class PlayerNetwork : Player
     {
         DontDestroyOnLoad(gameObject);    
     }
+    [Command]
+    public void CMDNextTurn()
+    {
+        TurnsHandler.Instance.NextTurn();
+    }
 }

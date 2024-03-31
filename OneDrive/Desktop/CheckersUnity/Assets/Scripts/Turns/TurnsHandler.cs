@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class TurnsHandler : NetworkBehaviour
 {
-    protected const string DRAW = "Ничья!";
-    protected const string WHITE_WIN = "Победитель: Светлый!";
-    protected const string BLACK_WIN = "Победитель: Тёмный!";
+    protected const string DRAW = "Tie!";
+    protected const string WHITE_WIN = "Winner: White";
+    protected const string BLACK_WIN = "Winner: Black";
 
     public bool WhiteTurn { get; protected set; }
     public List<Move> Moves { get; protected set; } = new List<Move>();

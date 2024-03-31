@@ -16,4 +16,23 @@ public class BoardNetwork : Board
     {
         FillBoardList(boardList);
     }
+    [Server]
+    public override void MoveOnBoard(Vector2Int oldPosition, Vector2Int newPosition, bool nextTurn)
+    {
+        base.MoveOnBoard(boardList, oldPosition, newPosition);
+
+    }
+    [ClientRpc]
+    void RPCMoveOnBoard(Vector2Int oldPosition, Vector2Int newPosition, bool nextTurn)
+    {
+        if (NetworkServer.active)
+        {
+            return;
+        }
+        MoveOnBoard(boardList, oldPosition, newPosition);
+        if (nextTurn)
+        {
+            NetworkClient.connection.identity.GetComponent<PlayerNetwork>().CMDNextTurn();
+        }
+    }
 }
